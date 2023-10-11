@@ -3,10 +3,14 @@ package com.elifoksas.foodorderingapp.ui.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.elifoksas.foodorderingapp.data.entity.Foods
 import com.elifoksas.foodorderingapp.databinding.MainpageItemBinding
+import com.elifoksas.foodorderingapp.ui.fragment.HomePageFragmentDirections
 import com.elifoksas.foodorderingapp.ui.viewmodel.HomePageViewModel
+import com.elifoksas.foodorderingapp.utils.gecis
 
 class FoodsAdapter(var mContext:Context, var foodsList:List<Foods>, var viewModel:HomePageViewModel)
     :RecyclerView.Adapter<FoodsAdapter.MainPageItemHolder>(){
@@ -27,8 +31,15 @@ class FoodsAdapter(var mContext:Context, var foodsList:List<Foods>, var viewMode
         val binding = holder.item
 
         binding.foodName.text = food.yemek_adi
-        binding.foodPrice.text = food.yemek_fiyat.toString()
+        binding.foodPrice.text = "₺${food.yemek_fiyat}"
 
+        val url = "http://kasimadalan.pe.hu/yemekler/resimler/${food.yemek_resim_adi}"
+        Glide.with(mContext).load(url).into(binding.foodImage)
+
+        binding.foodItemCardView.setOnClickListener {
+            val transition = HomePageFragmentDirections.actionHomePageFragmentToDetailsFragment(food)
+            Navigation.gecis(it,transition)
+        }
 
     }
 
