@@ -5,15 +5,46 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.elifoksas.foodorderingapp.R
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.elifoksas.foodorderingapp.databinding.FragmentHomePageBinding
+import com.elifoksas.foodorderingapp.ui.adapter.FoodsAdapter
+import com.elifoksas.foodorderingapp.ui.viewmodel.HomePageViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomePageFragment : Fragment() {
 
+    private lateinit var binding: FragmentHomePageBinding
+    private lateinit var viewModel: HomePageViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val tempViewModel:HomePageViewModel by viewModels()
+        viewModel = tempViewModel
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_page, container, false)
+        binding = FragmentHomePageBinding.inflate(inflater, container, false)
+
+        binding.rv.layoutManager = LinearLayoutManager(requireContext())
+
+        viewModel.foodsList.observe(viewLifecycleOwner){
+            val foodsAdapter = FoodsAdapter(requireContext(),it,viewModel)
+            binding.rv.adapter = foodsAdapter
+        }
+
+
+
+
+        return  binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadFoods()
     }
 }
