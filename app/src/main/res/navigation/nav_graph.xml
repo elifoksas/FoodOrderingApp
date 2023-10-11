@@ -26,5 +26,9 @@
         android:id="@+id/detailsFragment"
         android:name="com.elifoksas.foodorderingapp.ui.fragment.DetailsFragment"
         android:label="fragment_details"
-        tools:layout="@layout/fragment_details" />
+        tools:layout="@layout/fragment_details" >
+        <argument
+            android:name="food"
+            app:argType="com.elifoksas.foodorderingapp.data.entity.Foods" />
+    </fragment>
 </navigation>
