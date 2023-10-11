@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">FoodOrderingApp</string>
+    <string name="title_home">Home Page</string>
+    <string name="title_favorite">Favorites</string>
+    <string name="title_account">Account</string>
+    <string name="title_basket">Cart</string>
+
+    <string name="food_details">Food Details</string>
+    <string name="foods">Foods</string>
+    <string name="food_name">Food Name</string>
+    <string name="food_price">₺55,90</string>
+    <string name="order_amount">1</string>
+    <string name="order_price">₺55,90</string>
+    <string name="add_to_cart">Add To Cart</string>
+    <string name="basket">Basket</string>
+    <string name="order">Order And Pay</string>
+    <string name="total">Total:</string>
+</resources>
