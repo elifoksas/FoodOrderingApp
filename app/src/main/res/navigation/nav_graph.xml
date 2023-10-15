@@ -30,5 +30,8 @@
         <argument
             android:name="food"
             app:argType="com.elifoksas.foodorderingapp.data.entity.Foods" />
+        <action
+            android:id="@+id/action_detailsFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
     </fragment>
 </navigation>
