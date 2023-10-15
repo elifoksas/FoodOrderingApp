@@ -20,15 +20,12 @@ class HomePageViewModel @Inject constructor(var frepo : FoodRepository): ViewMod
     init {
         loadFoods()
     }
-
-
     fun loadFoods(){
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                Log.e("foods","gelio")
                 foodsList.value =frepo.loadFoods()
                 frepo.loadFoods().forEach {
-                    Log.d("foods",it.yemek_adi)
+                    Log.d("foods",it.food_name)
                 }
             }catch (e: Exception){
                  Log.e("foods",e.toString())
@@ -36,4 +33,14 @@ class HomePageViewModel @Inject constructor(var frepo : FoodRepository): ViewMod
 
         }
     }
+    fun addToCart(food_name : String,
+                  food_image_name : String,
+                  food_price : Int,
+                  food_quantity : Int,
+                  username : String){
+        CoroutineScope(Dispatchers.Main).launch {
+            frepo.addToCart(food_name,food_image_name,food_price,food_quantity,username)
+        }
+    }
+
 }
