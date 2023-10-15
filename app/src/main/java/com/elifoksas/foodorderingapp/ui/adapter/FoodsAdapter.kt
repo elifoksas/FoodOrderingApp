@@ -30,10 +30,10 @@ class FoodsAdapter(var mContext:Context, var foodsList:List<Foods>, var viewMode
         val food = foodsList.get(position)
         val binding = holder.item
 
-        binding.foodName.text = food.yemek_adi
-        binding.foodPrice.text = "₺${food.yemek_fiyat}"
+        binding.foodName.text = food.food_name
+        binding.foodPrice.text = "₺${food.food_price}"
 
-        val url = "http://kasimadalan.pe.hu/yemekler/resimler/${food.yemek_resim_adi}"
+        val url = "http://kasimadalan.pe.hu/yemekler/resimler/${food.food_image_name}"
         Glide.with(mContext).load(url).into(binding.foodImage)
 
         binding.foodItemCardView.setOnClickListener {
