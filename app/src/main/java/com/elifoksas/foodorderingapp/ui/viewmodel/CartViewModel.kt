@@ -21,8 +21,6 @@ class CartViewModel @Inject constructor(var frepo : FoodRepository): ViewModel()
     init {
         loadCart("elif_oksas")
     }
-
-
     fun loadCart(username:String){
         CoroutineScope(Dispatchers.Main).launch {
             cardFoodList.value = frepo.loadCart(username)
@@ -33,7 +31,7 @@ class CartViewModel @Inject constructor(var frepo : FoodRepository): ViewModel()
         }
     }
 
-    suspend fun deleteFood(cart_food_id : Int, username : String){
+    fun deleteFood(cart_food_id : Int, username : String){
         CoroutineScope(Dispatchers.Main).launch {
             frepo.deleteFood(cart_food_id,username)
             loadCart(username)

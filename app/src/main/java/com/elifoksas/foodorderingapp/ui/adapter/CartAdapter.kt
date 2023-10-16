@@ -22,19 +22,30 @@ class CartAdapter(var mContext: Context, var cartFoodsList:List<CartFoods>, var 
     override fun getItemCount(): Int {
         return cartFoodsList.size
     }
-
     override fun onBindViewHolder(holder: CartItemHolder, position: Int) {
+
         val cartFood = cartFoodsList.get(position)
         val binding = holder.item
 
         binding.foodNameTextView.text = cartFood.food_name
         binding.foodPriceTextView.text = "₺${cartFood.food_price}"
+        binding.orderAmountText.text = cartFood.food_quantity.toString()
 
         val url = "http://kasimadalan.pe.hu/yemekler/resimler/${cartFood.food_image_name}"
         Glide.with(mContext).load(url).into(binding.imageViewFood)
 
+        binding.minusButton.setOnClickListener {
+            if (cartFood.food_quantity > 0){
+                cartFood.food_quantity--
+                binding.orderAmountText.text = cartFood.food_quantity.toString()
+                if (cartFood.food_quantity == 0){
+                    viewModel.deleteFood(cartFood.cart_food_id,cartFood.username)
+                }
+            }
 
+        }
     }
+
 
 
 }

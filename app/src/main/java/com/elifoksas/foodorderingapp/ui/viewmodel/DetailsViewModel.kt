@@ -1,6 +1,9 @@
 package com.elifoksas.foodorderingapp.ui.viewmodel
 
+import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.elifoksas.foodorderingapp.data.entity.CartFoods
 import com.elifoksas.foodorderingapp.data.repository.FoodRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -10,6 +13,20 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailsViewModel  @Inject constructor(var frepo : FoodRepository): ViewModel(){
+
+    var cardFoodList = MutableLiveData<List<CartFoods>>()
+
+    fun loadCart(username:String){
+        CoroutineScope(Dispatchers.Main).launch {
+            cardFoodList.value = frepo.loadCart(username)
+        }
+    }
+    fun deleteFood(cart_food_id : Int, username : String){
+        CoroutineScope(Dispatchers.Main).launch {
+            frepo.deleteFood(cart_food_id,username)
+            loadCart(username)
+        }
+    }
     fun addToCart(food_name : String,
                   food_image_name : String,
                   food_price : Int,
@@ -17,6 +34,7 @@ class DetailsViewModel  @Inject constructor(var frepo : FoodRepository): ViewMod
                   username : String){
         CoroutineScope(Dispatchers.Main).launch {
             frepo.addToCart(food_name,food_image_name,food_price,food_quantity,username)
+
         }
     }
 }

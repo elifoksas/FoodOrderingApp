@@ -2,6 +2,7 @@ package com.elifoksas.foodorderingapp.ui.fragment
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -43,7 +44,6 @@ class DetailsFragment : Fragment() {
 
         updateUI()
         updatePrice()
-        addToCart(chosenFood.food_name,chosenFood.food_image_name,chosenFood.food_price,quantity,"elif_oksas")
 
         return binding.root
     }
@@ -74,19 +74,33 @@ class DetailsFragment : Fragment() {
 
         binding.quantityText.text = quantity.toString()
         binding.totalPriceText.text = "₺$totalPrice"
-    }
 
-    private fun addToCart(food_name : String,
-                          food_image_name : String,
-                          food_price : Int,
-                          food_quantity : Int,
-                          username : String){
+
+
         binding.addToCartButton.setOnClickListener {
-            viewModel.addToCart(food_name,food_image_name,food_price,food_quantity,username)
+            var evetMi:Boolean = false
+            viewModel.cardFoodList.observe(viewLifecycleOwner){
+                it.forEach {
+                    if(chosenFood.food_name == it.food_name){
+                        viewModel.deleteFood(it.cart_food_id,it.username)
+                        quantity += it.food_quantity
+                        evetMi = true
+                        Log.d("girdi","$quantity")
+                        viewModel.addToCart(chosenFood.food_name,chosenFood.food_image_name,chosenFood.food_price,quantity,"elif_oksas")
+                    }
+                }
+            }
+            if (!evetMi){
+                viewModel.addToCart(chosenFood.food_name,chosenFood.food_image_name,chosenFood.food_price,quantity,"elif_oksas")
+            }
+
+            //addToCart(chosenFood.food_name,chosenFood.food_image_name,chosenFood.food_price,quantity,"elif_oksas")
             val gecis = DetailsFragmentDirections.actionDetailsFragmentToCartFragment()
             Navigation.gecis(it,gecis)
         }
     }
+
+
 
 
 }
