@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.elifoksas.foodorderingapp.R
 import com.elifoksas.foodorderingapp.data.entity.Foods
 import com.elifoksas.foodorderingapp.databinding.MainpageItemBinding
 import com.elifoksas.foodorderingapp.ui.fragment.HomePageFragmentDirections
@@ -39,6 +40,17 @@ class FoodsAdapter(var mContext:Context, var foodsList:List<Foods>, var viewMode
         binding.foodItemCardView.setOnClickListener {
             val transition = HomePageFragmentDirections.actionHomePageFragmentToDetailsFragment(food)
             Navigation.gecis(it,transition)
+        }
+
+        //adding food to favorites
+        var isFavorite = false
+        binding.favButton.setOnClickListener {
+            isFavorite = !isFavorite
+            if (isFavorite) {
+                binding.favButton.setImageResource(R.drawable.favorite_fill_icon)
+            } else {
+                binding.favButton.setImageResource(R.drawable.favorite_icon)
+            }
         }
 
     }

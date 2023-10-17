@@ -15,16 +15,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/addButton"
+            <ImageButton
+                android:id="@+id/favButton"
+                android:clickable="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/secondary_red"
-                android:src="@drawable/plus_icon"
-                app:fabCustomSize="44dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="#00FFFFFF"
+                android:src="@drawable/favorite_icon"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:maxImageSize="28dp" />
+                app:shapeAppearanceOverlay="@style/circularShape" />
 
             <ImageView
                 android:id="@+id/foodImage"
@@ -33,6 +35,7 @@
                 android:layout_margin="8dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
