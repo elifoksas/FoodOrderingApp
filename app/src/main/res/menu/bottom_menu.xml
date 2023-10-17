@@ -7,7 +7,7 @@
         android:title="@string/title_home" />
     <item
         android:id="@+id/navigation_favorite"
-        android:icon="@drawable/favorite_icon"
+        android:icon="@drawable/favorite_fill_icon"
         android:title="@string/title_favorite" />
     <item
         android:id="@+id/navigation_account"
