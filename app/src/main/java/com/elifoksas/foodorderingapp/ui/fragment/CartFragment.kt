@@ -16,13 +16,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CartFragment : Fragment() {
     private lateinit var binding:FragmentCartBinding
-    private lateinit var viewModel: CartViewModel
+    private val viewModel: CartViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val tempViewModel:CartViewModel by viewModels()
-        viewModel=tempViewModel
-    }
+    private var totalPrice:Int = 0
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,10 +28,13 @@ class CartFragment : Fragment() {
         binding =  FragmentCartBinding.inflate(inflater, container, false)
 
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
+        viewModel.loadCart("elif_oksas")
         viewModel.cardFoodList.observe(viewLifecycleOwner){
+
             val cartAdapter = CartAdapter(requireContext(),it,viewModel)
             binding.recyclerView.adapter = cartAdapter
+
+
         }
 
 
@@ -43,6 +43,5 @@ class CartFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.loadCart("elif_oksas")
     }
 }

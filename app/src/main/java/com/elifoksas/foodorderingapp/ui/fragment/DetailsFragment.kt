@@ -20,17 +20,12 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class DetailsFragment : Fragment() {
     private lateinit var binding: FragmentDetailsBinding
-    private lateinit var viewModel: DetailsViewModel
+    private val viewModel: DetailsViewModel by viewModels()
 
     private lateinit var chosenFood: Foods
     private var quantity: Int = 1
     private var totalPrice: Int = 0
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val tempViewModel:DetailsViewModel by viewModels()
-        viewModel = tempViewModel
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,6 +36,11 @@ class DetailsFragment : Fragment() {
         val bundle:DetailsFragmentArgs by navArgs()
         chosenFood = bundle.food
         totalPrice = chosenFood.food_price
+        try {
+            viewModel.loadCart("elif_oksas")
+        }catch (e:Exception){
+            Log.e("yakalandı",e.message.toString())
+        }
 
         updateUI()
         updatePrice()
@@ -78,10 +78,16 @@ class DetailsFragment : Fragment() {
 
 
         binding.addToCartButton.setOnClickListener {
+            try {
+                viewModel.loadCart("elif_oksas")
+            }catch (e:Exception){
+                Log.e("yakalandı",e.message.toString())
+            }
             var evetMi:Boolean = false
             viewModel.cardFoodList.observe(viewLifecycleOwner){
                 it.forEach {
                     if(chosenFood.food_name == it.food_name){
+                        viewModel.loadCart("elif_oksas")
                         viewModel.deleteFood(it.cart_food_id,it.username)
                         quantity += it.food_quantity
                         evetMi = true

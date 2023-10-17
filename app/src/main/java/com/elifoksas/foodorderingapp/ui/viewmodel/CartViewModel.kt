@@ -11,6 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.http.Field
+import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
@@ -34,8 +35,23 @@ class CartViewModel @Inject constructor(var frepo : FoodRepository): ViewModel()
     fun deleteFood(cart_food_id : Int, username : String){
         CoroutineScope(Dispatchers.Main).launch {
             frepo.deleteFood(cart_food_id,username)
+            cardFoodList.value = frepo.loadCart(username)
+
             loadCart(username)
         }
+    }
+    fun addToCart(food_name : String,
+                  food_image_name : String,
+                  food_price : Int,
+                  food_quantity : Int,
+                  username : String){
+        CoroutineScope(Dispatchers.Main).launch {
+            frepo.addToCart(food_name,food_image_name,food_price,food_quantity,username)
+        }
+    }
+
+    fun calculateTotalPrice(){
+
     }
 
 }
