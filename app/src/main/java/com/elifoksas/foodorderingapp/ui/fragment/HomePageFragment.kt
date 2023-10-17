@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.elifoksas.foodorderingapp.databinding.FragmentHomePageBinding
 import com.elifoksas.foodorderingapp.ui.adapter.FoodsAdapter
 import com.elifoksas.foodorderingapp.ui.viewmodel.HomePageViewModel
@@ -30,14 +30,13 @@ class HomePageFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentHomePageBinding.inflate(inflater, container, false)
 
-        binding.rv.layoutManager = LinearLayoutManager(requireContext())
+        val layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.rv.layoutManager = layoutManager
 
         viewModel.foodsList.observe(viewLifecycleOwner){
             val foodsAdapter = FoodsAdapter(requireContext(),it,viewModel)
             binding.rv.adapter = foodsAdapter
         }
-
-
 
 
         return  binding.root
