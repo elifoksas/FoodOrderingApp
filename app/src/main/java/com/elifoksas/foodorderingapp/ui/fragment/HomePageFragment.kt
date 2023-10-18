@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.elifoksas.foodorderingapp.databinding.FragmentHomePageBinding
@@ -34,12 +35,40 @@ class HomePageFragment : Fragment() {
         binding.rv.layoutManager = layoutManager
 
         viewModel.foodsList.observe(viewLifecycleOwner){
-            val foodsAdapter = FoodsAdapter(requireContext(),it,viewModel)
+            val foodsAdapter = it?.let { it1 -> FoodsAdapter(requireContext(), it1,viewModel) }
             binding.rv.adapter = foodsAdapter
         }
 
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String): Boolean {
+                viewModel.filterFoods(p0)
+                return true
+            }
+
+            override fun onQueryTextChange(p0: String): Boolean {
+                viewModel.filterFoods(p0)
+                return false
+            }
+        })
+
+        binding.searchView.setOnCloseListener(object : SearchView.OnCloseListener {
+            override fun onClose(): Boolean {
+                viewModel.foodsList.observe(viewLifecycleOwner){
+                    val foodsAdapter = it?.let { it1 -> FoodsAdapter(requireContext(), it1,viewModel) }
+                    binding.rv.adapter = foodsAdapter
+                }
+                viewModel.loadFoods()
+                return true
+            }
+
+        })
+
 
         return  binding.root
+    }
+
+    private fun observeFoodList(){
+
     }
 
     override fun onResume() {

@@ -10,12 +10,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception
+import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
 class HomePageViewModel @Inject constructor(var frepo : FoodRepository): ViewModel(){
 
-    var foodsList = MutableLiveData<List<Foods>>()
+    var foodsList = MutableLiveData<List<Foods>?>()
 
     init {
         loadFoods()
@@ -33,14 +34,13 @@ class HomePageViewModel @Inject constructor(var frepo : FoodRepository): ViewMod
 
         }
     }
-    fun addToCart(food_name : String,
-                  food_image_name : String,
-                  food_price : Int,
-                  food_quantity : Int,
-                  username : String){
-        CoroutineScope(Dispatchers.Main).launch {
-            frepo.addToCart(food_name,food_image_name,food_price,food_quantity,username)
+
+    fun filterFoods(query: String){
+        val filteredList = foodsList.value?.filter { food ->
+            food.food_name.toLowerCase(Locale.getDefault()).contains(query.toLowerCase(Locale.getDefault()))
         }
+        foodsList.value = filteredList
     }
 
 }
+
