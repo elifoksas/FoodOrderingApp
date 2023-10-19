@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "89251867433",
+    "project_id": "foodorderingapp-ec80f",
+    "storage_bucket": "foodorderingapp-ec80f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:89251867433:android:3c11364ce6b63a71136538",
+        "android_client_info": {
+          "package_name": "com.elifoksas.foodorderingapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArgUell93rNW8jb8-YjbtpC59ySwvqOV4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
