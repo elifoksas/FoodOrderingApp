@@ -6,11 +6,11 @@
         android:icon="@drawable/homepage_icon"
         android:title="@string/title_home" />
     <item
-        android:id="@+id/navigation_favorite"
+        android:id="@+id/favoritesFragment"
         android:icon="@drawable/favorite_fill_icon"
         android:title="@string/title_favorite" />
     <item
-        android:id="@+id/navigation_account"
+        android:id="@+id/userFragment"
         android:icon="@drawable/person_icon"
         android:title="@string/title_account" />
 
