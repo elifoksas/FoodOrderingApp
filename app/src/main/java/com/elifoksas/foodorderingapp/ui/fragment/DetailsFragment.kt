@@ -36,12 +36,7 @@ class DetailsFragment : Fragment() {
         val bundle:DetailsFragmentArgs by navArgs()
         chosenFood = bundle.food
         totalPrice = chosenFood.food_price
-        try {
-            viewModel.loadCart("elif_oksas")
-        }catch (e:Exception){
-            Log.e("yakalandı",e.message.toString())
-        }
-
+        viewModel.loadCart("elif_oksas")
         updateUI()
         updatePrice()
 
@@ -78,11 +73,7 @@ class DetailsFragment : Fragment() {
 
 
         binding.addToCartButton.setOnClickListener {
-            try {
-                viewModel.loadCart("elif_oksas")
-            }catch (e:Exception){
-                Log.e("yakalandı",e.message.toString())
-            }
+            viewModel.loadCart("elif_oksas")
             var evetMi:Boolean = false
             viewModel.cardFoodList.observe(viewLifecycleOwner){
                 it.forEach {

@@ -23,8 +23,14 @@ class FoodDataSource(var fdao:FoodsDao) {
     }
 
     suspend fun loadCart(username : String) :List<CartFoods> = withContext(Dispatchers.IO){
-        val response = fdao.loadCart(username)
-        return@withContext response.cart_foods
+        try {
+            val response = fdao.loadCart(username)
+            return@withContext response.cart_foods
+        }catch (e:Exception){
+            Log.e("hata mesajı",e.message.toString())
+            return@withContext emptyList()
+        }
+
     }
 
     suspend fun deleteFood(cart_food_id : Int, username : String){
