@@ -29,12 +29,13 @@ class CartFragment : Fragment() {
 
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         viewModel.loadCart("elif_oksas")
-        viewModel.cardFoodList.observe(viewLifecycleOwner){
-
-            val cartAdapter = CartAdapter(requireContext(),it,viewModel)
+        viewModel.cartFoodList.observe(viewLifecycleOwner){
+            val cartAdapter = it?.let { it1 -> CartAdapter(requireContext(), it1,viewModel) }
             binding.recyclerView.adapter = cartAdapter
+        }
 
-
+        viewModel.totalPrice.observe(viewLifecycleOwner){
+            binding.totalPriceText.text = "₺${it.toString()}"
         }
 
 
