@@ -57,6 +57,10 @@ class CartAdapter(var mContext: Context, var cartFoodsList:List<CartFoods>, var 
             cartFood.food_quantity++
             binding.orderAmountText.text = cartFood.food_quantity.toString()
         }
+
+        binding.deleteButton.setOnClickListener {
+            viewModel.deleteFood(cartFood.cart_food_id,cartFood.username)
+        }
     }
 
 
