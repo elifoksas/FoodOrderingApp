@@ -6,13 +6,28 @@
     <string name="title_basket">Cart</string>
 
     <string name="food_details">Food Details</string>
+    <string name="favorites">Favorites</string>
+    <string name="user">User</string>
     <string name="foods">Foods</string>
     <string name="food_name">Food Name</string>
-    <string name="food_price">₺55,90</string>
+    <string name="food_price"> </string>
     <string name="order_amount">1</string>
     <string name="order_price">₺55,90</string>
     <string name="add_to_cart">Add To Cart</string>
     <string name="basket">Basket</string>
     <string name="order">Order And Pay</string>
-    <string name="total">Total:</string>
+    <string name="total">Total</string>
+    <string name="username">User Name</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="address">Address</string>
+    <string name="logout">Log Out</string>
+    <string name="welcome">Welcome!</string>
+    <string name="login">Log In</string>
+    <string name="signup">Sign Up</string>
+    <string name="dont_have_account">Don't have an account? Sign Up!</string>
+    <string name="already_have_account">Already have an account? Log In!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
