@@ -38,7 +38,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/food_name"
                 android:textColor="@color/black"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/imageViewFood"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -51,58 +51,73 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/food_price"
                 android:textColor="@color/secondary_red"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/imageViewFood"
                 app:layout_constraintTop_toBottomOf="@+id/foodNameTextView" />
 
-            <LinearLayout
+
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/deleteButton"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageButton
+                        android:id="@+id/minusButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:background="#00FFFFFF"
+                        android:padding="4dp"
+                        android:src="@drawable/minus_icon"
+                        app:layout_constraintTop_toBottomOf="@+id/foodName"
+                        tools:layout_editor_absoluteX="320dp" />
+
+                    <TextView
+                        android:id="@+id/orderAmountText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="12dp"
+                        android:text="@string/order_amount"
+                        android:textColor="@color/secondary_red"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toBottomOf="@+id/foodName"
+                        tools:layout_editor_absoluteX="360dp" />
+
+                    <ImageButton
+                        android:id="@+id/plusButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:background="#00FFFFFF"
+                        android:padding="4dp"
+                        android:src="@drawable/plus_icon"
+                        app:layout_constraintTop_toBottomOf="@+id/foodName"
+                        tools:layout_editor_absoluteX="384dp" />
+                </LinearLayout>
+
+
+
+            <ImageButton
+                android:id="@+id/deleteButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
+                android:background="#00FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageButton
-                    android:id="@+id/minusButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="12dp"
-                    android:background="#00FFFFFF"
-                    android:padding="4dp"
-                    android:src="@drawable/minus_icon"
-                    app:layout_constraintTop_toBottomOf="@+id/foodName"
-                    tools:layout_editor_absoluteX="320dp" />
-
-                <TextView
-                    android:id="@+id/orderAmountText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="12dp"
-                    android:text="@string/order_amount"
-                    android:textColor="@color/secondary_red"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintTop_toBottomOf="@+id/foodName"
-                    tools:layout_editor_absoluteX="360dp" />
-
-                <ImageButton
-                    android:id="@+id/plusButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="12dp"
-                    android:background="#00FFFFFF"
-                    android:padding="4dp"
-                    android:src="@drawable/plus_icon"
-                    app:layout_constraintTop_toBottomOf="@+id/foodName"
-                    tools:layout_editor_absoluteX="384dp" />
-            </LinearLayout>
-
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/delete_icon" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
