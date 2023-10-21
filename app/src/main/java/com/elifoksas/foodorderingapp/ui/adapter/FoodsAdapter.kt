@@ -56,6 +56,15 @@ class FoodsAdapter(var mContext:Context, var foodsList:List<Foods>, var viewMode
                 binding.favButton.setImageResource(R.drawable.favorite_icon)
             }
         }
+        val sharedPref = mContext.getSharedPreferences("",Context.MODE_PRIVATE)
+
+        foodsList.forEach {
+            if (sharedPref.getBoolean(it.food_id.toString(),false)){
+                binding.favButton.setImageResource(R.drawable.favorite_fill_icon)
+            } else {
+                binding.favButton.setImageResource(R.drawable.favorite_icon)
+            }
+        }
 
 
 

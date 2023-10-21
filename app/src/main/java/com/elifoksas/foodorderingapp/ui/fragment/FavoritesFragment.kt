@@ -1,5 +1,6 @@
 package com.elifoksas.foodorderingapp.ui.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -31,8 +32,11 @@ class FavoritesFragment : Fragment() {
         viewModel.getFavorites()
 
         viewModel.favoriteList.observe(viewLifecycleOwner){
+            val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
             it.forEach {
                 Log.d("favori",it.food_name)
+                sharedPref?.edit()?.putBoolean(it.food_id.toString(),true)
+
             }
             val favoritesAdapter = it?.let { it1 -> FavoritesAdapter(requireContext(), it1,viewModel) }
             binding.rv.adapter = favoritesAdapter

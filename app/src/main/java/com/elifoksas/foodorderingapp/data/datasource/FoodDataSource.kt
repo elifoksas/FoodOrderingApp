@@ -1,5 +1,6 @@
 package com.elifoksas.foodorderingapp.data.datasource
 
+import android.content.Context
 import android.util.Log
 import com.elifoksas.foodorderingapp.data.entity.CartFoods
 import com.elifoksas.foodorderingapp.data.entity.Foods
@@ -9,7 +10,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class FoodDataSource(var fdao:FoodsDao) {
+class FoodDataSource(val context: Context, var fdao:FoodsDao) {
     suspend fun addFavorites(foods : Foods) = withContext(Dispatchers.IO){
         var db = FirebaseFirestore.getInstance()
         val food = hashMapOf(
@@ -18,6 +19,8 @@ class FoodDataSource(var fdao:FoodsDao) {
             "food_price" to foods.food_price,
             "food_image_name" to foods.food_image_name,
         )
+        val sharedPref = context.getSharedPreferences("",Context.MODE_PRIVATE)
+        val kullaniciAdi = sharedPref.getString("KullaniciAdi","")
 
 // Add a new document with a generated ID
         db.collection("${FirebaseAuth.getInstance().currentUser?.uid}")

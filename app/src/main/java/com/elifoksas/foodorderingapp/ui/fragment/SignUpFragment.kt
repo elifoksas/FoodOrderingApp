@@ -1,6 +1,8 @@
 package com.elifoksas.foodorderingapp.ui.fragment
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +22,7 @@ class SignUpFragment : Fragment() {
     private lateinit var binding: FragmentSignUpBinding
     private val viewModel: SignUpViewModel by viewModels()
 
-
+    var kullaniciAdi = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,16 +39,25 @@ class SignUpFragment : Fragment() {
 
         binding.signUpButton.setOnClickListener {
             viewModel.signUp(binding.emailText.text.toString(),binding.emailPassword.text.toString())
+            kullaniciAdi = binding.usernameText.text.toString()
+            Log.d("kullaniciAdi",kullaniciAdi)
+            binding.signUpButton.isClickable = false
         }
 
 
         viewModel.signUpCheck.observe(viewLifecycleOwner){
             if(it){
+                val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+                with (sharedPref?.edit()) {
+                    this?.putString("KullaniciAdi", binding.usernameText.text.toString())
+                    this?.apply()
+                }
                 val transition = SignUpFragmentDirections.actionSignUpFragmentToHomePageFragment()
                 view?.let { it1 -> Navigation.gecis(it1,transition) }
             }
             else{
                 Toast.makeText(context,"Bilgileriniz Yanlış",Toast.LENGTH_SHORT).show()
+                binding.signUpButton.isClickable = true
             }
         }
 

@@ -7,6 +7,7 @@ import com.elifoksas.foodorderingapp.data.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,6 +27,7 @@ class SignUpViewModel@Inject constructor(var arepo : AuthRepository): ViewModel(
                 return@launch
             }
             arepo.signUp(email,password)
+            delay(2000)
             signUpCheck.value = arepo.isValid()
         }
     }

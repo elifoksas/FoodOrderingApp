@@ -1,5 +1,6 @@
 package com.elifoksas.foodorderingapp.ui.fragment
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.navigation.Navigation
 import com.elifoksas.foodorderingapp.databinding.FragmentUserBinding
 import com.elifoksas.foodorderingapp.ui.viewmodel.UserViewModel
 import com.elifoksas.foodorderingapp.utils.gecis
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,6 +39,11 @@ class UserFragment : Fragment() {
 
             }
         }
+
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+        val kullaniciAdi = sharedPref?.getString("KullaniciAdi", "")
+        binding.emailTextView.text = FirebaseAuth.getInstance().currentUser?.email
+        binding.userNameTextView.text = kullaniciAdi
 
 
         return binding.root
