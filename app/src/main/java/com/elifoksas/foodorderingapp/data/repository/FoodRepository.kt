@@ -7,6 +7,8 @@ import com.elifoksas.foodorderingapp.data.entity.Foods
 class FoodRepository (var fds:FoodDataSource){
 
     suspend fun loadFoods() : List<Foods> = fds.loadFoods()
+    suspend fun addFavorites(foods: Foods) = fds.addFavorites(foods)
+
     suspend fun addToCart(food_name : String,
                           food_image_name : String,
                           food_price : Int,

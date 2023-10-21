@@ -18,8 +18,17 @@ class HomePageViewModel @Inject constructor(var frepo : FoodRepository): ViewMod
 
     var foodsList = MutableLiveData<List<Foods>?>()
 
+    var favoriteControl = MutableLiveData<Boolean>()
+
     init {
         loadFoods()
+    }
+    fun addFavorites(favoriteFoods: Foods){
+        CoroutineScope(Dispatchers.Main).launch {
+            val success = frepo.addFavorites(favoriteFoods)
+
+            favoriteControl.value = success == 1
+        }
     }
     fun loadFoods(){
         CoroutineScope(Dispatchers.Main).launch {
@@ -43,4 +52,5 @@ class HomePageViewModel @Inject constructor(var frepo : FoodRepository): ViewMod
     }
 
 }
+
 

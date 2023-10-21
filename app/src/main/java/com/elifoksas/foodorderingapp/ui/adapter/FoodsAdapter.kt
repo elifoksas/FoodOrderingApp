@@ -1,8 +1,10 @@
 package com.elifoksas.foodorderingapp.ui.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -30,6 +32,7 @@ class FoodsAdapter(var mContext:Context, var foodsList:List<Foods>, var viewMode
     override fun onBindViewHolder(holder: MainPageItemHolder, position: Int) {
         val food = foodsList.get(position)
         val binding = holder.item
+        val view = holder.itemView
 
         binding.foodName.text = food.food_name
         binding.foodPrice.text = "₺${food.food_price}"
@@ -47,11 +50,15 @@ class FoodsAdapter(var mContext:Context, var foodsList:List<Foods>, var viewMode
         binding.favButton.setOnClickListener {
             isFavorite = !isFavorite
             if (isFavorite) {
+                viewModel.addFavorites(food)
                 binding.favButton.setImageResource(R.drawable.favorite_fill_icon)
             } else {
                 binding.favButton.setImageResource(R.drawable.favorite_icon)
             }
         }
+
+
+
 
     }
 
