@@ -10,7 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.math.log
+
 
 @HiltViewModel
 class DetailsViewModel  @Inject constructor(var frepo : FoodRepository): ViewModel(){
@@ -22,7 +22,6 @@ class DetailsViewModel  @Inject constructor(var frepo : FoodRepository): ViewMod
     }
     fun loadCart(username:String){
         CoroutineScope(Dispatchers.Main).launch {
-            Log.d("Girdi2","girdi2")
             if (frepo.loadCart(username).isNotEmpty()){
                 cardFoodList.value = frepo.loadCart(username)
 

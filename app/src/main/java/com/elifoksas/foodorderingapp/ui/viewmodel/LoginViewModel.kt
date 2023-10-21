@@ -20,7 +20,6 @@ class LoginViewModel @Inject constructor(var arepo : AuthRepository): ViewModel(
 
     fun login(email : String, password : String){
         CoroutineScope(Dispatchers.Main).launch {
-            Log.d("Girdi2","girdi2")
             if (email.isNullOrEmpty()){
                 loginCheck.value =false
                 return@launch

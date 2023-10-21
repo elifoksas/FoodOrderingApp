@@ -91,7 +91,6 @@ class DetailsFragment : Fragment() {
                 viewModel.addToCart(chosenFood.food_name,chosenFood.food_image_name,chosenFood.food_price,quantity,"elif_oksas")
             }
 
-            //addToCart(chosenFood.food_name,chosenFood.food_image_name,chosenFood.food_price,quantity,"elif_oksas")
             val gecis = DetailsFragmentDirections.actionDetailsFragmentToCartFragment()
             Navigation.gecis(it,gecis)
         }

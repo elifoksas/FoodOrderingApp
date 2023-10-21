@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.elifoksas.foodorderingapp.databinding.FragmentHomePageBinding
 import com.elifoksas.foodorderingapp.ui.adapter.FoodsAdapter
 import com.elifoksas.foodorderingapp.ui.viewmodel.HomePageViewModel
+import com.google.firebase.FirebaseApp
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,6 +24,8 @@ class HomePageFragment : Fragment() {
         super.onCreate(savedInstanceState)
         val tempViewModel:HomePageViewModel by viewModels()
         viewModel = tempViewModel
+        context?.let { FirebaseApp.initializeApp(it) }
+
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,12 +67,11 @@ class HomePageFragment : Fragment() {
         })
 
 
+
+
         return  binding.root
     }
 
-    private fun observeFoodList(){
-
-    }
 
     override fun onResume() {
         super.onResume()
