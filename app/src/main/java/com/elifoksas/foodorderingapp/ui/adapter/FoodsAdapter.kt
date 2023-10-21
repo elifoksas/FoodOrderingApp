@@ -56,14 +56,22 @@ class FoodsAdapter(var mContext:Context, var foodsList:List<Foods>, var viewMode
                 binding.favButton.setImageResource(R.drawable.favorite_icon)
             }
         }
-        val sharedPref = mContext.getSharedPreferences("",Context.MODE_PRIVATE)
 
+        val sharedPref = mContext.getSharedPreferences("",Context.MODE_PRIVATE)
         foodsList.forEach {
-            if (sharedPref.getBoolean(it.food_id.toString(),false)){
-                binding.favButton.setImageResource(R.drawable.favorite_fill_icon)
-            } else {
-                binding.favButton.setImageResource(R.drawable.favorite_icon)
+            if (food.food_id == it.food_id){
+                Log.d("FoodID","1")
+                if (sharedPref.getBoolean(food.food_id.toString(),false)){
+                    Log.d("FoodID","2")
+
+                    binding.favButton.setImageResource(R.drawable.favorite_fill_icon)
+                } else {
+                    Log.d("FoodID","3")
+
+                    binding.favButton.setImageResource(R.drawable.favorite_icon)
+                }
             }
+
         }
 
 

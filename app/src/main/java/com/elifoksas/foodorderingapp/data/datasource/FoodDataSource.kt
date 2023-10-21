@@ -19,7 +19,7 @@ class FoodDataSource(val context: Context, var fdao:FoodsDao) {
             "food_price" to foods.food_price,
             "food_image_name" to foods.food_image_name,
         )
-        val sharedPref = context.getSharedPreferences("",Context.MODE_PRIVATE)
+        val sharedPref = context.getSharedPreferences("elif_oksas",Context.MODE_PRIVATE)
         val kullaniciAdi = sharedPref.getString("KullaniciAdi","")
 
 // Add a new document with a generated ID

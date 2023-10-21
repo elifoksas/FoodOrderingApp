@@ -32,10 +32,11 @@ class FavoritesFragment : Fragment() {
         viewModel.getFavorites()
 
         viewModel.favoriteList.observe(viewLifecycleOwner){
-            val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+            val sharedPref = activity?.getSharedPreferences(
+                "elif_oksas", Context.MODE_PRIVATE)
             it.forEach {
                 Log.d("favori",it.food_name)
-                sharedPref?.edit()?.putBoolean(it.food_id.toString(),true)
+                sharedPref?.edit()?.putBoolean(it.food_id.toString(),true)?.apply()
 
             }
             val favoritesAdapter = it?.let { it1 -> FavoritesAdapter(requireContext(), it1,viewModel) }

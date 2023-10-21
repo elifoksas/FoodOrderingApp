@@ -17,7 +17,7 @@ class FavoritesDataSource {
     }
 
     suspend fun getFavorites() = withContext(Dispatchers.IO){
-
+        list.clear()
         val docRef = FirebaseFirestore.getInstance()
             .collection(FirebaseAuth.getInstance().currentUser?.uid.toString())
 
