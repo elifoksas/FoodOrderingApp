@@ -1,6 +1,10 @@
 package com.elifoksas.foodorderingapp.di
 
+import com.elifoksas.foodorderingapp.data.datasource.FavoritesDataSource
 import com.elifoksas.foodorderingapp.data.datasource.FoodDataSource
+import com.elifoksas.foodorderingapp.data.datasource.UserDataSource
+import com.elifoksas.foodorderingapp.data.repository.AuthRepository
+import com.elifoksas.foodorderingapp.data.repository.FavoritesRepository
 import com.elifoksas.foodorderingapp.data.repository.FoodRepository
 import com.elifoksas.foodorderingapp.retrofit.ApiUtils
 import com.elifoksas.foodorderingapp.retrofit.FoodsDao
@@ -30,4 +34,28 @@ class AppModule {
     fun provideFoodsDao() : FoodsDao {
         return ApiUtils.getFoodsDao()
     }
+
+    @Provides
+    @Singleton
+    fun provideUserDataSource() : UserDataSource {
+        return UserDataSource()
+    }
+    @Provides
+    @Singleton
+    fun provideAuthRepository(uds:UserDataSource) : AuthRepository {
+        return AuthRepository(uds)
+    }
+
+    @Provides
+    @Singleton
+    fun provideFavoritesRepository(fds: FavoritesDataSource) : FavoritesRepository {
+        return FavoritesRepository(fds)
+    }
+
+    @Provides
+    @Singleton
+    fun provideFavoritesDataSource() : FavoritesDataSource {
+        return FavoritesDataSource()
+    }
+
 }
