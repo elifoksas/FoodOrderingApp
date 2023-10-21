@@ -1,5 +1,6 @@
 package com.elifoksas.foodorderingapp.di
 
+import android.content.Context
 import com.elifoksas.foodorderingapp.data.datasource.FavoritesDataSource
 import com.elifoksas.foodorderingapp.data.datasource.FoodDataSource
 import com.elifoksas.foodorderingapp.data.datasource.UserDataSource
@@ -11,6 +12,7 @@ import com.elifoksas.foodorderingapp.retrofit.FoodsDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -19,10 +21,9 @@ import javax.inject.Singleton
 class AppModule {
     @Provides
     @Singleton
-    fun provideFoodDataSource(fdao:FoodsDao) : FoodDataSource {
-        return FoodDataSource(fdao)
+    fun provideFoodDataSource(context: Context,fdao:FoodsDao) : FoodDataSource {
+        return FoodDataSource(provideContext(context),fdao)
     }
-
     @Provides
     @Singleton
     fun provideFoodRepository(fds:FoodDataSource) : FoodRepository {
@@ -56,6 +57,11 @@ class AppModule {
     @Singleton
     fun provideFavoritesDataSource() : FavoritesDataSource {
         return FavoritesDataSource()
+    }
+    @Provides
+    @Singleton
+    fun provideContext(@ApplicationContext context: Context): Context {
+        return context
     }
 
 }
