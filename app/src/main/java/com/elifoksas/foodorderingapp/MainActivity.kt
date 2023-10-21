@@ -2,6 +2,7 @@ package com.elifoksas.foodorderingapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
@@ -30,5 +31,13 @@ class MainActivity : AppCompatActivity() {
         navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
         NavigationUI.setupWithNavController(bottomNavigationView,navController)
+
+        navController.addOnDestinationChangedListener{_ , destination, _->
+            bottomNavigationView.visibility = if (destination.id == R.id.loginFragment || destination.id == R.id.signUpFragment){
+                View.GONE
+            }else{
+                View.VISIBLE
+            }
+        }
     }
 }
