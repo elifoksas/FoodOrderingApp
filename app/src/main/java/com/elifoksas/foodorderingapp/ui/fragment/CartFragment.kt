@@ -7,8 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.elifoksas.foodorderingapp.R
+import com.elifoksas.foodorderingapp.data.entity.CartFoods
 import com.elifoksas.foodorderingapp.databinding.FragmentCartBinding
 import com.elifoksas.foodorderingapp.ui.adapter.CartAdapter
 import com.elifoksas.foodorderingapp.ui.viewmodel.CartViewModel
@@ -20,6 +24,7 @@ class CartFragment : Fragment() {
     private lateinit var binding:FragmentCartBinding
     private val viewModel: CartViewModel by viewModels()
 
+    private var foodList : List<CartFoods> = listOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +41,10 @@ class CartFragment : Fragment() {
             val cartAdapter = it?.let { it1 -> CartAdapter(requireContext(), it1,viewModel) }
             binding.recyclerView.adapter = cartAdapter
 
+            if (it != null) {
+                foodList = it
+            }
+
         }
 
         viewModel.totalPrice.observe(viewLifecycleOwner){
@@ -46,9 +55,9 @@ class CartFragment : Fragment() {
             val builder = AlertDialog.Builder(context)
             builder.setTitle("Siparişi Onaylıyor musunuz?")
             builder.setPositiveButton("Evet") { dialog, which ->
-
                 dialog.dismiss()
                 showCongratsDialog()
+                deleteOrders()
             }
             builder.setNegativeButton("Hayır") { dialog, which ->
 
@@ -59,7 +68,19 @@ class CartFragment : Fragment() {
         }
 
 
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
+            findNavController().popBackStack(R.id.homePageFragment,false)
+        }
+
+
         return binding.root
+    }
+
+    fun deleteOrders(){
+        foodList.forEach {
+            viewModel.deleteFood(it.cart_food_id, it.username)
+        }
     }
     private fun showCongratsDialog() {
         val congratsDialogBuilder = AlertDialog.Builder(context)
