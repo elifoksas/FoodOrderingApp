@@ -24,6 +24,21 @@ We utilized the following key technologies and tools in the development of this 
 - LiveData to observe and react to data changes.
 - MVVM (Model-View-ViewModel) architecture for a clean and maintainable codebase.
 
+
+## User Interfaces
+
+<p align="center">
+  <img src="images/1.png" width="250" >
+  <img src="images/7.png" width="250" >
+  <img src="images/2.png" width="250" >
+  <img src="images/3.png" width="250" >
+  <img src="images/5.png" width="250" >
+  <img src="images/4.png" width="250" >
+  <img src="images/6.png" width="250" >
+  <img src="images/8.png" width="250" >
+ 
+</p>
+
 Feel free to explore the source code and contribute to the project. If you have any questions or feedback, please don't hesitate to reach out. 
 
 Happy coding! 🚀
